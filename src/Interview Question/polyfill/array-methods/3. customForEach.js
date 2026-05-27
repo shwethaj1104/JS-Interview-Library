@@ -39,3 +39,43 @@ Array.prototype.myFind = function(callback) {
 const nums1 = [1,2,3,4]
 nums1.find((num,index, nums) => num === 4) //Return 4
 nums1.find((num,index, nums) => num === 25) //Return -1
+
+
+//returns TRUE if AT LEAST ONE element passes the condition
+Array.prototype.customSome = function(callback, thisArgs) {
+  if (typeof callback !== 'function') {
+    throw new Error('Invalid Function');
+  }
+
+  let sourceArray = this;
+  let length = this.length;
+
+  for (let index = 0; index < length; index++) {
+    if (index in sourceArray) {
+      if (callback.call(thisArgs, sourceArray[index], index, sourceArray)) {
+        return true;   // 🔥 stop immediately
+      }
+    }
+  }
+  return false;
+};
+
+
+//returns TRUE only if ALL elements pass the condition
+Array.prototype.customSome = function(callback, thisArgs) {
+  if (typeof callback !== 'function') {
+    throw new Error('Invalid Function');
+  }
+
+  let sourceArray = this;
+  let length = this.length;
+
+  for (let index = 0; index < length; index++) {
+    if (index in sourceArray) {
+      if (callback.call(thisArgs, sourceArray[index], index, sourceArray)) {
+        return true;   // 🔥 stop immediately
+      }
+    }
+  }
+  return false;
+};
